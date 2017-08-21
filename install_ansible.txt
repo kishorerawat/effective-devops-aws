@@ -1,0 +1,13 @@
+Step 1 : Add the EPEL Repository
+
+$ sudo yum install epel-release
+
+
+Step 2: Install Ansible
+
+$ sudo yum install ansible
+
+Step 3: Verify Ansbile
+
+$ ansible --version
+
