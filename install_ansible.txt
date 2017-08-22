@@ -11,3 +11,11 @@ Step 3: Verify Ansbile
 
 $ ansible --version
 
+Step 4 : We also need the AWS boto library for python modules
+$ sudo pip install boto
+
+Step 5: We need the ec2.py for ec2 inventory 
+$ curl -Lo ec2.py http://bit.ly/2v4SwE5
+$ chmod +x ec2.py
+
+Step 6: Create ec2.ini and ansible.cfg files
