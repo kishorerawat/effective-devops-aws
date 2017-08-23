@@ -83,7 +83,7 @@ ud = Base64(Join('\n', [
     "sudo mv ec2-user /var/spool/cron/"
 ]))
 
-i.add_resource(Role(
+t.add_resource(Role(
   "Role",
   AssumeRolePolicyDocument=Policy(
      Statement=[

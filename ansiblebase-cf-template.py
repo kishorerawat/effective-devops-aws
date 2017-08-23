@@ -63,7 +63,8 @@ ud = Base64(Join('\n', [
     "yum install --enablerepo=epel -y git",
     "pip install ansible",
     AnsiblePullCmd,
-    "echo '*/10 * * * * {0}' > /etc/cron.d/ansible-pull".format(AnsiblePullCmd)
+    "echo '*/10 * * * * {0}' > ec2-user".format(AnsiblePullCmd),
+    "sudo mv ec2-user /var/spool/cron/"
 ]))
 
 t.add_resource(ec2.Instance(

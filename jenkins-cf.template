@@ -38,6 +38,37 @@
         }
     },
     "Resources": {
+        "InstanceProfile": {
+            "Properties": {
+                "Path": "/",
+                "Roles": [
+                    {
+                        "Ref": "Role"
+                    }
+                ]
+            },
+            "Type": "AWS::IAM::InstanceProfile"
+        },
+        "Role": {
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": [
+                                "sts:AssumeRole"
+                            ],
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": [
+                                    "ec2.amazonaws.com"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            "Type": "AWS::IAM::Role"
+        },
         "SecurityGroup": {
             "Properties": {
                 "GroupDescription": "Allow SSH and TCP/8080 access",
@@ -60,6 +91,9 @@
         },
         "instance": {
             "Properties": {
+                "IamInstanceProfile": {
+                    "Ref": "InstanceProfile"
+                },
                 "ImageId": "ami-77af2014",
                 "InstanceType": "t2.micro",
                 "KeyName": {
@@ -78,8 +112,8 @@
                                 "#!/bin/bash",
                                 "yum install --enablerepo=epel -y git",
                                 "pip install ansible",
-                                "/usr/local/bin/ansible-pull -U https://github.com/kishorerawat/effective-devops-aws helloworld.yml -i localhost",
-                                "echo '*/10 * * * * /usr/local/bin/ansible-pull -U https://github.com/kishorerawat/effective-devops-aws helloworld.yml -i localhost' > ec2-user",
+                                "/usr/local/bin/ansible-pull -U https://github.com/kishorerawat/effective-devops-aws jenkins.yml -i localhost",
+                                "echo '*/10 * * * * /usr/local/bin/ansible-pull -U https://github.com/kishorerawat/effective-devops-aws jenkins.yml -i localhost' > ec2-user",
                                 "sudo mv ec2-user /var/spool/cron/"
                             ]
                         ]
